@@ -13,47 +13,68 @@ import requests
 
 headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:26.0) Gecko/20100101 Firefox/26.0'}
 
-def make_yandex_search(query):
+
+def get_params():
+    search_system = input('Enter search system: ')
+    query = input('Enter your query: ')
+    recursive = input('Want to get recursive result, yes or no: ')
+    max_result = int(input('How many results would you like to get: '))
+    output_mode = input('In which format do you want to get results: json, csv or console?')
+
+    params = {
+        'search_system': search_system,
+        'query': query,
+        'recursive': recursive,
+        'max_result': max_result,
+        'output_mode': output_mode
+    }
+
+    return params
+
+
+def make_yandex_search(**params):
 
     base_url = 'https://yandex.ru/search/'
 
     params = {
         'lr': 213,
-        'text': query
+        'text': params.get('query')
+    }
     }
     response = requests.post(base_url, headers=headers, params=params)
     
-    return response.url
+    return response.text
 
 
 
-def make_google_search(query):
+def make_google_search(**params):
 
     base_url = 'https://www.google.com/search'
 
     params = {
-        'q': query
+        'q': params.get('query')
     }
     response = requests.post(base_url, headers=headers, params=params)
     
-    return response.url
+    return response.text
 
 
 
-def make_mail_search(query):
+def make_mail_search(**params):
 
     base_url = 'https://go.mail.ru/search'
 
     params = {
-        'q': query
+        'q': params.get('query')
     }
+    
     response = requests.post(base_url, headers=headers, params=params)
     
-    return response.url
+    return response.text
 
 
 
-def select_search(query, search_type: str):
+def select_search(search_system: str):
 
     search_choice = {
         'yandex': make_yandex_search,
@@ -62,12 +83,9 @@ def select_search(query, search_type: str):
     }
 
     choise = search_choice.get(
-        search_type, None)
+        search_system, None)
     
     if choise:
-        return choise(query)
+        return choise
     else:
         return 'Inputed search system is unknown. Try to use: mail, yandex or google'
-
-
-print(select_search('Power BI', 'maissl'))
