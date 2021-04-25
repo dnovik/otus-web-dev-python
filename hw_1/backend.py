@@ -13,6 +13,7 @@ class Search:
     input_element_name = None
     next_page_element_name = None
     x_path = None
+    pager_class = None
 
     def __init__(
             self,
@@ -46,13 +47,24 @@ class Search:
         input_field.send_keys(self.query)
         input_field.send_keys(Keys.RETURN)
 
-    def collect_links(self) -> List:
+    def collect_links(self) -> Dict:
 
-        self.open_page()
         self.make_request()
         elements = self.browser.find_elements_by_xpath(self.x_path)
+        texts = [el.text for el in elements]
+        url = [el.get_attribute('href') for el in elements]
+        links = dict(zip(texts, url))
 
-        return elements
+        while len(links) <= self.max_result:
+            next_page_url = self.browser.find_elements_by_class_name(self.pager_class)[-1]\
+                .get_attribute('href')
+            self.browser.get(next_page_url)
+            elements = self.browser.find_elements_by_xpath(self.x_path)
+            texts = [el.text for el in elements]
+            url = [el.get_attribute('href') for el in elements]
+            links.update(dict(zip(texts, url)))
+
+        return links
 
     def collect_recursively(self) -> Dict:
         
@@ -86,7 +98,8 @@ class YandexSearch(Search):
 
     start_url = 'https://yandex.ru'
     input_element_name = 'text'
-    x_path = '//*[@id="search-result"]/a'
+    x_path = '//*[@id="search-result"]/li/div/h2/a'
+    pager_class = 'link_target_serp'
 
     def __init__(
             self,
@@ -100,6 +113,7 @@ class MailSearch(Search):
     start_url = 'https://mail.ru'
     input_element_name = 'q'
     x_path = '//*[@class="SnippetResultTitle-title result__title"]/a'
+    pager_class = 'PageNavigator-itemBlock'
 
     def __init__(
             self,
