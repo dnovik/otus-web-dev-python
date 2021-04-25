@@ -1,4 +1,4 @@
-from hw_1.backend import MailSearch, YandexSearch, GoogleSearch
+from backend.search_engine import MailSearch, YandexSearch, GoogleSearch
 
 
 def test_yandex_request():
