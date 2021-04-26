@@ -1,4 +1,4 @@
-# otus-web-dev-python
+# Search engine
 
 - Проект тестировался и запускался только на Windows 10
 - Основан на Selenium и веб-драйвере Chrome - без драйвера не взлетит.
