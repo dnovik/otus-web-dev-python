@@ -1,6 +1,7 @@
 
-from backend.search_engine import MailSearch, \
-    YandexSearch, GoogleSearch
+from backend.yandex_search import YandexSearch
+from backend.mail_search import MailSearch
+from backend.google_search import GoogleSearch
 
 
 def get_engine():
