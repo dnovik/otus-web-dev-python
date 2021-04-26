@@ -1,1 +1,0 @@
-# otus-web-dev-python
