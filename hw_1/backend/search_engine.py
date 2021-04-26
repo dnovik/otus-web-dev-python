@@ -1,6 +1,6 @@
 import csv
 import json
-from typing import Dict
+from typing import Dict, Union
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -16,7 +16,7 @@ class Search:
 
     def __init__(
             self,
-            **kwargs):
+            **kwargs: Union[str, None, int, bool]):
 
         self.headless = kwargs.get('headless', True)
         self.query = kwargs.get('query')
@@ -44,7 +44,8 @@ class Search:
         '''submit input query in search field of selected search system'''
 
         self.open_page()
-        input_field = self.browser.find_element_by_name(self.input_element_name)
+        input_field = self.browser.find_element_by_name(
+            self.input_element_name)
         input_field.send_keys(self.query)
         input_field.send_keys(Keys.RETURN)
 
@@ -72,7 +73,8 @@ class Search:
 
     def get_result_in_csv(self):
         link_list = self.collect_links()
-        with open('results/links.csv', 'w', encoding='cp1251', newline='') as f:
+        with open('results/links.csv', 'w',
+                  encoding='cp1251', newline='') as f:
             writer = csv.writer(f, delimiter=';')
             for link in link_list:
                 text, url = link[0], link[1]
