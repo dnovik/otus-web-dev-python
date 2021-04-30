@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import List
+
 from sqlalchemy import (
     Column,
     Integer,
@@ -11,7 +11,6 @@ from sqlalchemy import (
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import (
     relationship, sessionmaker)
-
 
 engine = create_engine('sqlite:///db/my_blog.db', encoding='utf-8', echo=True)
 Base = declarative_base()
@@ -38,7 +37,7 @@ class User(Base):
         session.close()
 
     @classmethod
-    def get_user_by_name(cls,  session, name):
+    def get_user_by_name(cls, session, name):
         user = session.query(User).filter_by(username=name).first()
         session.close()
 
@@ -49,6 +48,13 @@ class User(Base):
         user = session.query(User).filter_by(username=old_username).first()
         user.username = new_username
         session.add(user)
+        session.commit()
+        session.close()
+
+    @classmethod
+    def delete_user(cls, session, username):
+        user = session.query(User).filter_by(username=username).first()
+        session.delete(user)
         session.commit()
         session.close()
 
@@ -86,3 +92,6 @@ class Post(Base):
 def create_tables():
     Base.metadata.create_all(engine)
 
+
+def drop_tables():
+    Base.metadata.drop_all(engine)
