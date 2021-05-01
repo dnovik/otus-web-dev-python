@@ -1,5 +1,4 @@
-from backend.models import create_tables, drop_tables
+from backend.models import User
 
 if __name__ == '__main__':
-    create_tables()
-    #drop_tables()
+    User.create_table()

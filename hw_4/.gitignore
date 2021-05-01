@@ -130,3 +130,4 @@ dmypy.json
 .pyre/
 /results/links.csv
 /results/links.json
+/db/my_blog.db

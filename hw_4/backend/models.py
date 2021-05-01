@@ -9,12 +9,10 @@ from sqlalchemy import (
     ForeignKey,
     create_engine)
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import (
-    relationship, sessionmaker)
+from sqlalchemy.orm import relationship
 
-engine = create_engine('sqlite:///db/my_blog.db', encoding='utf-8', echo=True)
 Base = declarative_base()
-Session = sessionmaker(engine)
+engine = create_engine('sqlite:///db/my_blog.db', echo=True)
 
 
 class User(Base):
@@ -26,6 +24,14 @@ class User(Base):
     created_at = Column(DateTime(), default=datetime.utcnow(), nullable=False)
 
     posts = relationship('Post', back_populates='author')
+
+    @classmethod
+    def create_table(cls):
+        User.metadata.create_all(engine)
+
+    @classmethod
+    def drop_table(cls):
+        User.metadata.drop_all(engine)
 
     @classmethod
     def create_user(cls, session, username, age):
@@ -71,8 +77,7 @@ class Post(Base):
     author = relationship('User', back_populates='posts')
 
     @classmethod
-    def create_post(cls, title, text):
-        session = Session()
+    def create_post(cls, session, title, text):
         post = Post(
             title=title,
             text=text)
@@ -81,17 +86,8 @@ class Post(Base):
         session.close()
 
     @classmethod
-    def get_post_by_title(cls, title):
-        session = Session()
+    def get_post_by_title(cls, session, title):
         post = session.query(Post).filter_by(title=title).first()
         session.close()
 
         return post
-
-
-def create_tables():
-    Base.metadata.create_all(engine)
-
-
-def drop_tables():
-    Base.metadata.drop_all(engine)

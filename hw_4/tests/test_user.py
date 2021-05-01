@@ -1,5 +1,5 @@
 import pytest
-from backend.models import create_tables, drop_tables
+
 from backend.models import User
 
 
@@ -29,4 +29,3 @@ class TestUser:
         User.delete_user(session, user.username)
         deleted_user = User.get_user_by_name(session, name)
         assert deleted_user is None
-
