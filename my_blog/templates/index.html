@@ -9,6 +9,12 @@
           crossorigin="anonymous">
 </head>
 <body>
+    <div class="jumbotron jumbotron-fluid" style="margin-bottom: 2rem">
+  <div class="container">
+    <h1 class="display-5">Все о Python</h1>
+    <p class="lead">Добро пожаловать на сайт-блог про Python и сопутствующие технологиии</p>
+  </div>
+</div>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <div class="container-fluid">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -24,19 +30,11 @@
       </div>
     </div>
   </div>
-    <form class="d-flex">
-      <input class="form-control me-2" type="search" placeholder="" aria-label="Search">
-      <a class="btn btn-primary" href="search_result.html" type="submit">Поиск</a>
-    </form>
 </nav>
-<div class="container-lg" style="width: 800px;  margin-top: 1.5rem">
-    <div class="jumbotron jumbotron-fluid" style="margin-bottom: 2rem">
-  <div class="container">
-    <h1 class="display-5">Все о Python</h1>
-    <p class="lead">Добро пожаловать на сайт-блог про Python и сопутствующие технологиии</p>
-  </div>
-</div>
-    <div class="card" style="width: 54rem; margin-bottom: 1rem" >
+<div class="container-lg" style="margin-top: 1.5rem">
+    <div class="row">
+    <div class="col-sm">
+            <div class="card" style="width: 54rem; margin-bottom: 1rem" >
       <div class="card-body">
         <h5 class="card-title">Что мы знаем про шаблонизаторы?</h5>
         <h6 class="card-subtitle mb-2 text-muted">Пост про jinja2 и ему подобных</h6>
@@ -67,8 +65,25 @@
         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
         <a class="btn btn-primary" href="post.html">Подробнее</a>
       </div>
+        </div>
     </div>
-    <nav style="margin-top: 2rem; margin-left: 35%">
+    <div class="col-sm">
+        <form class="d-flex">
+          <input class="form-control" type="search" placeholder="" aria-label="Search">
+          <a class="btn btn-primary" href="search_result.html" type="submit" style="margin-left: -1rem;">Поиск</a>
+        </form>
+        <div class="card" style="margin-top: 1rem">
+          <div class="card-header">Featured</div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">An item</li>
+                <li class="list-group-item">A second item</li>
+                <li class="list-group-item">A third item</li>
+              </ul>
+        </div>
+    </div>
+        </div>
+    <div class="row">
+            <nav style="margin-top: 2rem; margin-left: 35%">
   <ul class="pagination">
     <li class="page-item">
       <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
@@ -83,6 +98,7 @@
     </li>
   </ul>
 </nav>
+    </div>
 </div>
 </body>
 </html>
