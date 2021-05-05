@@ -7,23 +7,22 @@ from sqlalchemy import (
     Text,
     DateTime,
     ForeignKey,
-    create_engine)
+    create_engine,
+    func)
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 
-Base = declarative_base()
 engine = create_engine('sqlite:///db/my_blog.db', echo=True)
+Base = declarative_base(bind=engine)
 
 
 class User(Base):
     __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True, autoincrement=True, nullable=False)
-    username = Column(String(50), default="", nullable=False)
-    age = Column(Integer(), default="", nullable=False)
+    username = Column(String(50), default='', nullable=False)
+    age = Column(Integer(), default='', nullable=False)
     created_at = Column(DateTime(), default=datetime.utcnow(), nullable=False)
-
-    posts = relationship('Post', back_populates='author')
 
     @classmethod
     def create_table(cls):
@@ -34,7 +33,7 @@ class User(Base):
         User.metadata.drop_all(engine)
 
     @classmethod
-    def create_user(cls, session, username, age):
+    def create(cls, session, username, age):
         user = User(
             username=username,
             age=age)
@@ -65,29 +64,91 @@ class User(Base):
         session.close()
 
 
-class Post(Base):
-    __tablename__ = 'posts'
+class Author(Base):
+    __tablename__ = 'authors'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    title = Column(String(), default="")
-    text = Column(Text(), default="")
-    created_at = Column(DateTime(), default=datetime.utcnow())
-    user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
-
-    author = relationship('User', back_populates='posts')
+    first_name = Column(String(50), default='', nullable=False)
+    last_name = Column(String(50), default='', nullable=False)
+    full_name = Column(String(100), default='')
+    created_at = Column(DateTime, default=datetime.utcnow())
+    annotation = Column(Text, default='')
+    image_url = Column(String(150), default='')
 
     @classmethod
-    def create_post(cls, session, title, text):
-        post = Post(
-            title=title,
-            text=text)
-        session.add(post)
+    def create(cls, session, first_name, last_name, annotation, image_url):
+
+        full_name = ' '.join((first_name, last_name))
+
+        author = Author(
+            first_name=first_name,
+            last_name=last_name,
+            full_name=full_name,
+            annotation=annotation,
+            image_url=image_url)
+        session.add(author)
         session.commit()
         session.close()
 
+
+class Genre(Base):
+    __tablename__ = 'genres'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String(50), default='', nullable=False)
+    created_at = Column(DateTime, default=datetime.utcnow())
+
+    books = relationship('BookGenres', back_populates='genres')
+
     @classmethod
-    def get_post_by_title(cls, session, title):
-        post = session.query(Post).filter_by(title=title).first()
+    def create(cls, session, name):
+        genre = Genre(
+            name=name)
+        session.add(genre)
+        session.commit()
         session.close()
 
-        return post
+
+class Book(Base):
+    __tablename__ = 'books'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    created_at = Column(DateTime, default=datetime.utcnow(), server_default=func.now())
+    name = Column(String(100), default='', nullable=False)
+    published_date = Column(String, default='')
+    annotation = Column(Text, default='')
+    image_url = Column(String(150), default='')
+    rating = Column(Integer, default=5)
+    author = Column(String(100), default='', nullable=False)
+
+    genres = relationship('BookGenres', back_populates='books')
+
+    @classmethod
+    def create(cls,
+               session,
+               name,
+               published_date,
+               annotation,
+               image_url,
+               rating,
+               author):
+        book = Book(name=name,
+                    published_date=published_date,
+                    annotation=annotation,
+                    image_url=image_url,
+                    rating=rating,
+                    author=author
+                    )
+        session.add(book)
+        session.commit()
+        session.close()
+
+
+class BookGenres(Base):
+    __tablename__ = 'bookgenres'
+
+    book_id = Column(Integer, ForeignKey('books.id'), primary_key=True)
+    genre_id = Column(Integer, ForeignKey('genres.id'), primary_key=True)
+    books = relationship('Book', back_populates='genres')
+    genres = relationship('Genre', back_populates='books')
+
