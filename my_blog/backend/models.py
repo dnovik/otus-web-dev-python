@@ -78,7 +78,7 @@ class Author(Base):
     image_url = Column(String(150), default='')
 
     @classmethod
-    def create(cls, session, first_name, last_name, annotation, image_url):
+    def create(cls, first_name, last_name, annotation, image_url):
 
         full_name = ' '.join((first_name, last_name))
 
@@ -92,6 +92,20 @@ class Author(Base):
         session.commit()
         session.close()
 
+    @classmethod
+    def get_authors(cls):
+        authors = session.query(Author).all()
+        session.close()
+
+        return authors
+
+    @classmethod
+    def get_author_by_id(cls, author_id):
+        author = session.query(Book).filter_by(id=author_id).first()
+        session.close()
+
+        return author
+
 
 class Genre(Base):
     __tablename__ = 'genres'
@@ -103,7 +117,7 @@ class Genre(Base):
     books = relationship('BookGenres', back_populates='genres')
 
     @classmethod
-    def create(cls, session, name):
+    def create(cls, name):
         genre = Genre(
             name=name)
         session.add(genre)
@@ -127,7 +141,6 @@ class Book(Base):
 
     @classmethod
     def create(cls,
-               session,
                name,
                published_date,
                annotation,

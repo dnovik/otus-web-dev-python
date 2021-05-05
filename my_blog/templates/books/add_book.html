@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Add book
+{% endblock %}
+
+{% block content %}
+ <div class="container" style="margin-top: 2rem;">
+    <p class="lead">Введите информацию о книге</p>
+      <form style="width: 600px; margin-top: 2rem;" method="post">
+          <div class="col" style="margin-top: 2rem;">
+              <p>
+                  <label for="name">Название книги:</label>
+                  <input type="text" class="form-control" required>
+              </p>
+              <p style="margin-top: 2rem;">
+                  <label for="author">Автор:</label>
+                  <input type="text" class="form-control" required>
+              </p>
+              <p style="margin-top: 2rem;">
+                  <label for="published_date">Дата выхода:</label>
+                  <input type="text" class="form-control" required>
+              </p>
+              <p style="margin-top: 2rem;">
+                  <label for="image_url">Ссылка на изображение обложки:</label>
+                  <input type="text" class="form-control" required>
+              </p>
+              <p style="margin-top: 2rem;">
+                  <label for="rating">Рейтинг:</label>
+                  <input type="text" class="form-control" required>
+              </p>
+          </div>
+            <div class="row" style="height: 400px; margin-top: 2rem;">
+                <div class="col">
+                    <p>
+                        <label for="annotation">Аннотация:</label>
+                        <input type="text"
+                           class="form-control"
+                           style="height: 200px; margin-bottom: 1rem;" maxlength="350;" required>
+                    </p>
+                    <button type="submit" class="btn btn-primary">Добавить</button>
+                </div>
+            </div>
+        </form>
+  </div>
+{% endblock %}

@@ -18,7 +18,7 @@
                     <div class="col-md-7">
                       <div class="card-body">
                         <h5 class="card-title">{{ book.name }}</h5>
-                          <h6 class="card-subtitle mb-2 text-muted">{{ book.author }}</h6>
+                          <h6 class="card-subtitle mb-2 text-muted">Автор: {{ book.author }}</h6>
                         <p class="card-text">{{ book.annotation }}</p>
                         <p class="card-text"><small class="text-muted">{{ book.created_at }}</small></p>
                           <a class="btn btn-primary" href="{{ url_for('books_app.details', book_id=book.id) }}">

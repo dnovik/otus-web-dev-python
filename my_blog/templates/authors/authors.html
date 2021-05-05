@@ -7,28 +7,24 @@
 
 
 {% block content %}
+{% for author in authors %}
 <div class="container-lg" style="margin-top: 2rem;">
         <div class="col-lg">
             <div class="card mb-3">
                 <div class="row g-0">
                     <div class="col-md-4">
-                      <img src="../static/images/king.png" alt="..."
-                           style="margin-top: 1rem; margin-left: 1rem; margin=bottom: 1rem;">
+                      <img src={{ author.image_url }} alt="..."
+                           style="margin-top: 1rem; margin-left: 1rem; margin=bottom: 1rem; weight: 198px;">
                     </div>
                     <div class="col-md-7">
                       <div class="card-body">
-                        <h5 class="card-title">Стивен Кинг</h5>
-                        <p class="card-text">Американский писатель, работающий в разнообразных жанрах, включая ужасы, триллер, фантастику, фэнтези, мистику, драму;
-                            получил прозвище «Король ужасов».
-                            Продано более 350 миллионов экземпляров его книг, по которым было снято множество
-                            художественных фильмов и сериалов, телевизионных постановок, а также нарисованы комиксы.
-                            Кинг опубликовал 60 романов, в том числе семь под псевдонимом Ричард Бахман,
-                            и 5 научно-популярных книг.</p>
-                          <a class="btn btn-primary" href="post.html">Подробнее</a>
+                        <h5 class="card-title">{{ author.name }}</h5>
+                        <p class="card-text">{{ author.annotation }}</p>
                       </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+{% endfor %}
 {% endblock %}
