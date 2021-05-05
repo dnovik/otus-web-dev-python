@@ -10,10 +10,12 @@ from sqlalchemy import (
     create_engine,
     func)
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, sessionmaker
 
-engine = create_engine('sqlite:///db/my_blog.db', echo=True)
+engine = create_engine('sqlite:///db/my_blog.db')
 Base = declarative_base(bind=engine)
+Session = sessionmaker(bind=engine)
+session = Session()
 
 
 class User(Base):
@@ -33,7 +35,7 @@ class User(Base):
         User.metadata.drop_all(engine)
 
     @classmethod
-    def create(cls, session, username, age):
+    def create(cls, username, age, session=session):
         user = User(
             username=username,
             age=age)
@@ -143,6 +145,19 @@ class Book(Base):
         session.commit()
         session.close()
 
+    @classmethod
+    def get_books(cls):
+        books = session.query(Book).all()
+        session.close()
+
+        return books
+
+    @classmethod
+    def get_book_by_id(cls, book_id):
+        book = session.query(Book).filter_by(id=book_id).first()
+        session.close()
+
+        return book
 
 class BookGenres(Base):
     __tablename__ = 'bookgenres'
