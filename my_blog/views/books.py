@@ -1,19 +1,20 @@
 from flask import Blueprint, render_template, request, redirect, url_for
-from backend.models import Book
+from backend.models import Book, session, Author
 
 books_app = Blueprint('books_app', __name__, url_prefix='/books')
 
 
 @books_app.route('/', endpoint='list')
 def book_list():
-    books = Book.get_books()
-    return render_template('books/books.html', books=books)
+    records = session.query(Book, Author).join(Author, Author.full_name == Book.author).all()
+    session.close()
+    return render_template('books/books.html', records=records)
 
 
-@books_app.route('/<int:book_id>/', endpoint='details')
+@books_app.route('/<int:book_id>/', endpoint='book_details')
 def book_detail(book_id):
     book = Book.get_book_by_id(book_id)
-    return render_template('books/details.html', book=book)
+    return render_template('books/book_details.html', book=book)
 
 
 @books_app.route('/add/', endpoint='add', methods=['GET', 'POST'])

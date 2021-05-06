@@ -6,22 +6,24 @@
 
 
 {% block content %}
-    {% for book in books %}
+    {% for record in records %}
         <div class="container-lg" style="margin-top: 1.5rem">
     <div class="row">
         <div class="col-sm">
             <div class="card mb-3">
                 <div class="row g-0">
                     <div class="col-md-4">
-                      <img src={{ book.image_url }} alt="..." style="margin-top: 1rem; margin-left: 1rem;">
+                      <img src="{{ record.Book.image_url }}" alt="..." style="margin-top: 1rem; margin-left: 1rem;">
                     </div>
                     <div class="col-md-7">
                       <div class="card-body">
-                        <h5 class="card-title">{{ book.name }}</h5>
-                          <h6 class="card-subtitle mb-2 text-muted">Автор: {{ book.author }}</h6>
-                        <p class="card-text">{{ book.annotation }}</p>
-                        <p class="card-text"><small class="text-muted">{{ book.created_at }}</small></p>
-                          <a class="btn btn-primary" href="{{ url_for('books_app.details', book_id=book.id) }}">
+                        <h5 class="card-title">{{ record.Book.name }}</h5>
+                          <a href="{{ url_for('authors_app.author_details', author_id=record.Author.id) }}"
+                             class="card-subtitle mb-2 text-muted">{{ record.Book.author }}
+                          </a>
+                        <p class="card-text">{{ record.Book.annotation }}</p>
+                        <p class="card-text"><small class="text-muted">{{ record.Book.created_at }}</small></p>
+                          <a class="btn btn-primary" href="{{ url_for('books_app.book_details', book_id=record.Book.id) }}">
                               Подробнее
                           </a>
                       </div>

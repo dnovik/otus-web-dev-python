@@ -101,7 +101,7 @@ class Author(Base):
 
     @classmethod
     def get_author_by_id(cls, author_id):
-        author = session.query(Book).filter_by(id=author_id).first()
+        author = session.query(Author).filter_by(id=author_id).first()
         session.close()
 
         return author

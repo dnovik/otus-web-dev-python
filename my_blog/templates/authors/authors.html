@@ -20,6 +20,9 @@
                       <div class="card-body">
                         <h5 class="card-title">{{ author.name }}</h5>
                         <p class="card-text">{{ author.annotation }}</p>
+                          <a class="btn btn-primary" href="{{ url_for('authors_app.author_details', author_id=author.id) }}">
+                              Подробнее
+                          </a>
                       </div>
                     </div>
                 </div>

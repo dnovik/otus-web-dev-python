@@ -1,0 +1,38 @@
+<{% extends 'base.html' %}
+
+<div class="container-lg">
+{% block title %}
+    {{ author.full_name }}
+{% endblock %}
+
+{% block content %}
+<div class="container-lg" style="margin-top: 2.5rem">
+    <h3>{{ author.full_name }}</h3>
+    <p>{{ author.annotation }}</p>
+
+    <h5 style="margin-top: 2.5rem">Книги автора на сайте:</h5>
+    <div class="container" style="margin-top: 1.5rem">
+      <div class="row">
+          {% for book in author_books %}
+            <div class="col-2">
+                <a href="{{ url_for('books_app.book_details', book_id=book.Book.id) }}">
+                    <img src="{{ book.Book.image_url }}" alt="...">
+                </a>
+            </div>
+          {% endfor %}
+      </div>
+    </div>
+    <h5 style="margin-top: 2.5rem">Другие авторы на сайте:</h5>
+    <div class="container" style="margin-top: 1.5rem">
+      <div class="row">
+          {% for author in other_authors %}
+            <div class="col-2">
+                <a href="{{ url_for('authors_app.author_details', author_id=author.id) }}">
+                    <img src="{{ author.image_url }}}" alt="...">
+                </a>
+            </div>
+          {% endfor %}
+      </div>
+</div>
+{% endblock %}
+    </div>
