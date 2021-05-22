@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'activities.apps.ActivitiesConfig',
     'contacts.apps.ContactsConfig',
+    'opportunities.apps.OpportunitiesConfig',
 ]
 
 MIDDLEWARE = [
