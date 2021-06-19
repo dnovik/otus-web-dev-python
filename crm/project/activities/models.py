@@ -11,10 +11,16 @@ class Activity(models.Model):
         OPEN = 'Open'
         IN_PROGRESS = 'In progress'
 
+    class Type(models.TextChoices):
+        PHONE_CALL = 'phone_call'
+        MEETING = 'meeting'
+        EMAIL = 'email'
+
     author = models.ForeignKey(get_user_model(), on_delete=models.PROTECT)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
     status = models.CharField(choices=Status.choices, default=Status.OPEN, max_length=12)
+    type = models.CharField(choices=Type.choices, default=Type.EMAIL, max_length=30, null=False)
     title = models.CharField(max_length=250, null=False)
     description = models.TextField(null=False)
     customer = models.ForeignKey(Account, on_delete=models.PROTECT)

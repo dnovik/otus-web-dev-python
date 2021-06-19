@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Opportunities</title>
+</head>
+<body>
+<h5>List of Opportunities</h5>
+{% for object in object_list %}
+    <ul>
+        {{ object.title }}
+        {{ object.account }}
+        {{ object.contact }}
+        {{ object.created }}
+        {{ object.modified }}
+    </ul>
+
+{% endfor %}
+</body>
+</html>
