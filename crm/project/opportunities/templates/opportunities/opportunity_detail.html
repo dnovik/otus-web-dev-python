@@ -1,9 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+{% extends 'main/base.html' %}
+
+{% block title %}
+    {{ object.title }}
+{% endblock %}
+
+{% block content %}
 <body>
     {{ object.title }}
     {{ object.account }}
@@ -13,5 +14,5 @@
     {{ object.activities }}
 
 <a href="{% url 'opportunities' %}">All opportunities</a>
+{% endblock %}
 </body>
-</html>

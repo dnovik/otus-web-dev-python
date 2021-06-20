@@ -1,21 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+{% extends 'main/base.html' %}
+{% block title %}
+    Activities
+{% endblock %}
 <body>
-    <h5>List of Activities</h5>
-    {% for object in object_list %}
-    {{ object.author }}
-    {{ object.created }}
-    {{ object.modified }}
-    {{ object.status }}
-    {{ object.type }}
-    {{ object.title }}
-    {{ object.description }}
-    {{ object.customer }}
-    {{ object.contact }}
-    {% endfor %}
+{% block content %}
+<div class="container">
+<table class="table">
+  <thead>
+    <tr>
+          <th scope="col">Author</th>
+          <th scope="col">Created</th>
+          <th scope="col">Modified</th>
+          <th scope="col">Status</th>
+          <th scope="col">Type</th>
+          <th scope="col">Title</th>
+          <th scope="col">Description</th>
+          <th scope="col">Customer</th>
+          <th scope="col">Contact</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for object in object_list %}
+    <tr>
+         <td>{{ object.author }}</td>
+         <td>{{ object.created }}</td>
+         <td>{{ object.modified }}</td>
+         <td>{{ object.status }}</td>
+         <td>{{ object.type }}</td>
+         <td>{{ object.title }}</td>
+         <td>{{ object.description }}</td>
+         <td>{{ object.customer }}</td>
+         <td>{{ object.contact }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+    </div>
+{% endblock %}
 </body>
 </html>

@@ -1,7 +1,7 @@
-from django.shortcuts import render
-from .models import Opportunity
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, FormView
 from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, FormView
+
+from .models import Opportunity
 
 
 class OpportunityLIst(ListView):
@@ -24,6 +24,7 @@ class OpportunityCreate(CreateView):
     template_name = 'opportunities/opportunity_form.html'
     fields = '__all__'
     success_url = reverse_lazy('opportunities')
+
 
 
 class OpportunityUpdate(UpdateView):
