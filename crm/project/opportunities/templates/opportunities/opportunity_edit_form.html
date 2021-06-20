@@ -1,7 +1,7 @@
 {% extends 'main/base.html' %}
 
 {% block title %}
-    New Opportunity
+    Edit {{ object.title }}
 {% endblock %}
 
 {% block content %}
@@ -30,7 +30,7 @@
                     {{ form.activities }}
                 </div>
                 <div class="row g-1 w-80 p-3" style="margin-bottom:30px;">
-                    <input class="w-25 p-1" type="submit" value="Create">
+                    <input class="w-25 p-1" type="submit" value="Save changes">
                 </div>
             </form>
          </div>

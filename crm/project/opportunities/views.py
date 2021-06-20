@@ -26,10 +26,12 @@ class OpportunityCreate(CreateView):
     success_url = reverse_lazy('opportunities')
 
 
-
 class OpportunityUpdate(UpdateView):
-
     model = Opportunity
+    template_name = 'opportunities/opportunity_edit_form.html'
+    pk_url_kwarg = 'opportunity_pk'
+    fields = '__all__'
+    success_url = reverse_lazy('opportunities')
 
 
 class OpportunityDelete(DeleteView):

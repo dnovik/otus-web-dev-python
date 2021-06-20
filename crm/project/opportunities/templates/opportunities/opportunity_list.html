@@ -6,16 +6,42 @@ Opportunities
 
 <body>
 {% block content %}
-    {% for object in object_list %}
-        <ul>
-            <a href="{% url 'opportunity' opportunity_pk=object.pk %}">
-                {{ object.title }}
+<div class="container">
+        <a href="{% url 'opportunity_add' %}">
+            <button type="button" class="btn btn-success" style="margin-bottom: 25px;">
+                Add new
+            </button>
+        </a>
+<table class="table" style="margin-top:30px;">
+  <thead>
+    <tr>
+          <th scope="col">Account</th>
+          <th scope="col">Contact</th>
+          <th scope="col">Created</th>
+          <th scope="col">Modified</th>
+          <th scope="col">Last activity</th>
+          <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for object in object_list %}
+    <tr>
+         <td>{{ object.account }}</td>
+         <td>{{ object.contact }}</td>
+         <td>{{ object.created }}</td>
+         <td>{{ object.modified }}</td>
+         <td>
+             <a href="{% url 'activity' activity_pk=object.id %}">{{ object.activities }}</a>
+         </td>
+        <td>
+             <a href="{% url 'opportunity_edit' opportunity_pk=object.id %}"
+                <button type="button" class="btn btn-danger w-100">Edit</button>
             </a>
-            {{ object.account }}
-            {{ object.contact }}
-            {{ object.created }}
-            {{ object.modified }}
-        </ul>
-    {% endfor %}
+         </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+    </div>
 {% endblock %}
 </body>

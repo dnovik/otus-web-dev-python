@@ -1,9 +1,8 @@
 {% extends 'main/base.html' %}
 
 {% block title %}
-    New Opportunity
+    New Activity
 {% endblock %}
-
 {% block content %}
 <body>
  <div class="container-sm">
@@ -14,20 +13,32 @@
                  <div class="row g-1 .custom-header" style="margin-bottom:30px;"></div>
                  <div class="row g-1 "></div>
                 <div class="row g-1 w-80 p-3">
+                    <p>Author</p>
+                    {{ form.author }}
+                </div>
+                <div class="row g-1 w-80 p-3">
+                    <p>Status</p>
+                    {{ form.status }}
+                </div>
+                <div class="row g-1 w-80 p-3">
+                    <p>Type</p>
+                    {{ form.type }}
+                </div>
+                <div class="row g-1 w-80 p-3">
                     <p>Title</p>
                     {{ form.title }}
                 </div>
                 <div class="row g-1 w-80 p-3">
-                    <p>Account</p>
-                    {{ form.account }}
+                    <p>Description</p>
+                    {{ form.description }}
+                </div>
+                <div class="row g-1 w-80 p-3">
+                    <p>Customer</p>
+                    {{ form.customer }}
                 </div>
                 <div class="row g-1 w-80 p-3">
                     <p>Contact</p>
                     {{ form.contact }}
-                </div>
-                <div class="row g-1 w-80 p-3">
-                    <p>Activities</p>
-                    {{ form.activities }}
                 </div>
                 <div class="row g-1 w-80 p-3" style="margin-bottom:30px;">
                     <input class="w-25 p-1" type="submit" value="Create">
