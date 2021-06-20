@@ -1,22 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Opportunities</title>
-</head>
-<body>
-<h5>List of Opportunities</h5>
-{% for object in object_list %}
-    <ul>
-        <a href="{% url 'opportunity' opportunity_pk=object.pk %}">
-            {{ object.title }}
-        </a>
-        {{ object.account }}
-        {{ object.contact }}
-        {{ object.created }}
-        {{ object.modified }}
-    </ul>
+{% extends 'main/base.html' %}
 
-{% endfor %}
+{% block title %}
+Opportunities
+{% endblock %}
+
+<body>
+{% block content %}
+    {% for object in object_list %}
+        <ul>
+            <a href="{% url 'opportunity' opportunity_pk=object.pk %}">
+                {{ object.title }}
+            </a>
+            {{ object.account }}
+            {{ object.contact }}
+            {{ object.created }}
+            {{ object.modified }}
+        </ul>
+
+    {% endfor %}
+{% endblock %}
 </body>
-</html>
