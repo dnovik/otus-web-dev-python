@@ -8,7 +8,9 @@
 <h5>List of Opportunities</h5>
 {% for object in object_list %}
     <ul>
-        {{ object.title }}
+        <a href="{% url 'opportunity' opportunity_pk=object.pk %}">
+            {{ object.title }}
+        </a>
         {{ object.account }}
         {{ object.contact }}
         {{ object.created }}

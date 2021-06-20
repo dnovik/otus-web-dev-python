@@ -11,7 +11,7 @@ class Opportunity(models.Model):
     contact = models.ForeignKey(Contact, on_delete=models.PROTECT)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
-    activities = models.ManyToManyField(Activity)
+    activities = models.ForeignKey(Activity, on_delete=models.PROTECT, null=True)
 
     def __str__(self):
         return self.title

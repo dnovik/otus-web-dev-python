@@ -14,7 +14,7 @@ class OpportunityLIst(ListView):
 class OpportunityDetail(DetailView):
 
     model = Opportunity
-    template_name = 'opportunity_detail.html'
+    template_name = 'opportunities/opportunity_detail.html'
     pk_url_kwarg = 'opportunity_pk'
 
 
