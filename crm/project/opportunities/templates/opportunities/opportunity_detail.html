@@ -4,15 +4,32 @@
     {{ object.title }}
 {% endblock %}
 
-{% block content %}
 <body>
-    {{ object.title }}
-    {{ object.account }}
-    {{ object.contact }}
-    {{ object.created }}
-    {{ object.modified }}
-    {{ object.activities }}
-
-<a href="{% url 'opportunities' %}">All opportunities</a>
+{% block content %}
+    <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-3">
+        <div class="card" style="width: 18rem;">
+              <img src="..." class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{ object.title }}</h5>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">{{ object.account }}</li>
+                <li class="list-group-item">{{ object.contact }}</li>
+                <li class="list-group-item">{{ object.created }}</li>
+                  <li class="list-group-item">{{ object.modified }}</li>
+              </ul>
+              <div class="card-body">
+                  <a href="{% url 'opportunity_edit' opportunity_pk=object.id %}"
+                <button type="button" class="btn btn-warning w-100" style="margin-bottom:15px;">Edit</button>
+                    </a>
+                  <a href="{% url 'opportunity_delete' opportunity_pk=object.id %}"
+                <button type="button" class="btn btn-danger w-100">Delete</button>
+                </a>
+              </div>
+        </div>
+          </div>
+    </div>
 {% endblock %}
 </body>

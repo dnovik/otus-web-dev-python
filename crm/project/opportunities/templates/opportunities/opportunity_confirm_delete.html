@@ -1,7 +1,7 @@
 {% extends 'main/base.html' %}
 
 {% block title %}
-    Edit {{ object.title }}
+    Confirm delete {{ object.title }}
 {% endblock %}
 
 {% block content %}
@@ -14,28 +14,23 @@
                  <div class="row g-1 .custom-header" style="margin-bottom:30px;"></div>
                  <div class="row g-1 "></div>
                 <div class="row g-1 w-80 p-3">
-                    <p>Title</p>
-                    {{ form.title }}
+                    <p> <b>Title:</b> {{ object.title }}</p>
                 </div>
                 <div class="row g-1 w-80 p-3">
-                    <p>Account</p>
-                    {{ form.account }}
+                    <p> <b>Account:</b> {{ object.account }}</p>
                 </div>
                 <div class="row g-1 w-80 p-3">
-                    <p>Contact</p>
-                    {{ form.contact }}
+                    <p> <b>Contact:</b> {{ object.contact }}</p>
                 </div>
                 <div class="row g-1 w-80 p-3">
-                    <p>Activities</p>
-                    {{ form.activities }}
+                    <p> <b>Last Activity:</b> {{ object.activities }}</p>
                 </div>
                 <div class="row g-1 w-80 p-3" style="margin-bottom:30px;">
-                    <input class="w-25 p-1" type="submit" value="Save changes">
+                    <input class="w-25 p-1" type="submit" value="Delete">
                 </div>
             </form>
          </div>
          <div class="col-sm-3"></div>
  </div>
      </div>
-</body>
 {% endblock %}

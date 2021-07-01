@@ -37,6 +37,9 @@ class OpportunityUpdate(UpdateView):
 class OpportunityDelete(DeleteView):
 
     model = Opportunity
+    template_name = 'opportunities/opportunity_confirm_delete.html'
+    pk_url_kwarg = 'opportunity_pk'
+    success_url = reverse_lazy('opportunities')
 
 
 class OpportunityForm(FormView):

@@ -1,0 +1,49 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+    Delete {{ object.title }}
+{% endblock %}
+
+{% block content %}
+<body>
+ <div class="container-sm">
+     <div class="row g-3">
+         <div class="col-sm-3"></div>
+         <div class="col">
+            <form method="post" class="form-control" style="background-color: rgba(0,0,255,.1);">{% csrf_token %}
+                <div class="row g-1 w-80 p-3">
+                    <p>
+                        <b>Author:</b> {{ object.author }}
+                    </p>
+                </div>
+                <div class="row g-1 w-80 p-3">
+                    <p>
+                        <b>Status: </b>{{ object.status }}
+                    </p>
+                </div>
+                <div class="row g-1 w-80 p-3">
+                    <p>
+                        <b>Type: </b> {{ object.type }}</p>
+                </div>
+                <div class="row g-1 w-80 p-3">
+                    <p> <b>Title: </b> {{ object.title }}</p>
+                </div>
+                <div class="row g-1 w-80 p-3">
+                    <p> <b>Description: </b>{{ object.description }}</p>
+                </div>
+                <div class="row g-1 w-80 p-3">
+                    <p> <b>Customer:</b> {{ object.customer }}</p>
+                </div>
+                <div class="row g-1 w-80 p-3">
+                    <p> <b>Contact:</b> {{ object.contact }}</p>
+                </div>
+                <div class="row g-1 w-80 p-3" style="margin-bottom:30px;">
+                    <input class="w-25 p-1" type="submit" value="Delete">
+                </div>
+            </form>
+         </div>
+         <div class="col-sm-3"></div>
+ </div>
+     </div>
+</body>
+{% endblock %}

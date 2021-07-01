@@ -34,9 +34,17 @@ Opportunities
              <a href="{% url 'activity' activity_pk=object.id %}">{{ object.activities }}</a>
          </td>
         <td>
+            <div class="container">
              <a href="{% url 'opportunity_edit' opportunity_pk=object.id %}"
-                <button type="button" class="btn btn-danger w-100">Edit</button>
+                <button type="button" class="btn btn-secondary" style="width=15px;">Edit</button>
             </a>
+            <a href="{% url 'opportunity_delete' opportunity_pk=object.id %}"
+                <button type="button" class="btn btn-danger">Delete</button>
+            </a>
+            <a href="{% url 'opportunity' opportunity_pk=object.id %}"
+                <button type="button" class="btn btn-primary" style="margin-left=15px;">View</button>
+            </a>
+                </div>
          </td>
     </tr>
   {% endfor %}
