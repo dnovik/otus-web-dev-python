@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-from accounts.models import Account
+from accounts.models import AccountItem
 from contacts.models import Contact
 
 
@@ -23,7 +23,7 @@ class Activity(models.Model):
     type = models.CharField(choices=Type.choices, default=Type.EMAIL, max_length=30, null=False)
     title = models.CharField(max_length=250, null=False)
     description = models.TextField(null=False)
-    customer = models.ForeignKey(Account, on_delete=models.PROTECT)
+    customer = models.ForeignKey(AccountItem, on_delete=models.PROTECT)
     contact = models.ForeignKey(Contact, on_delete=models.PROTECT)
 
     def __str__(self):

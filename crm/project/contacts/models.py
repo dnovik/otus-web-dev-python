@@ -1,5 +1,5 @@
 from django.db import models
-from accounts.models import Account
+from accounts.models import AccountItem
 
 
 class Contact(models.Model):
@@ -9,7 +9,7 @@ class Contact(models.Model):
     last_name = models.CharField(max_length=150)
     mobile_num = models.CharField(max_length=20)
     email = models.EmailField()
-    company = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='contacts')
+    company = models.ForeignKey(AccountItem, on_delete=models.CASCADE, related_name='contacts')
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=True)
